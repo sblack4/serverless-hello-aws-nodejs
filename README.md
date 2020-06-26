@@ -93,5 +93,79 @@ AwsCommon, AwsCompileAlbEvents, AwsCompileAlexaSkillEvents, AwsCompileAlexaSmart
 ### Test Locally
 
 ```
+>  sls invoke local -f hello
+{
+    "statusCode": 200,
+    "body": "{\n  \"message\": \"Go Serverless v1.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
+}
+```
 
+### Deploy
+Obviously, log in to AWS first.
+```
+>  sls deploy
+Serverless: Packaging service...
+Serverless: Excluding development dependencies...
+Serverless: Creating Stack...
+Serverless: Checking Stack create progress...
+........
+Serverless: Stack create finished...
+Serverless: Uploading CloudFormation file to S3...
+Serverless: Uploading artifacts...
+Serverless: Uploading service serverless-hello-aws-nodejs.zip file to S3 (2.53 KB)...
+Serverless: Validating template...
+Serverless: Updating Stack...
+Serverless: Checking Stack update progress...
+................
+Serverless: Stack update finished...
+Service Information
+service: serverless-hello-aws-nodejs
+stage: dev
+region: us-east-1
+stack: serverless-hello-aws-nodejs-dev
+resources: 6
+api keys:
+  None
+endpoints:
+  None
+functions:
+  hello: serverless-hello-aws-nodejs-dev-hello
+layers:
+  None
+Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
+```
+
+### Test your Live Code
+
+```
+>  sls invoke -f hello
+{
+    "statusCode": 200,
+    "body": "{\n  \"message\": \"Go Serverless v1.0! Your function executed successfully!\",\n  \"input\": {}\n}"
+}
+```
+
+### Metrics/Stats
+
+```
+>  sls metrics -f hello
+hello
+June 24, 2020 10:03 PM - June 25, 2020 10:03 PM
+
+Invocations: 1 
+Throttles: 0 
+Errors: 0 
+Duration (avg.): 2.52ms
+```
+
+### Bye, delete function
+
+```
+>  sls remove -f hello
+Serverless: Getting all objects in S3 bucket...
+Serverless: Removing objects in S3 bucket...
+Serverless: Removing Stack...
+Serverless: Checking Stack removal progress...
+.........
+Serverless: Stack removal finished...
 ```
